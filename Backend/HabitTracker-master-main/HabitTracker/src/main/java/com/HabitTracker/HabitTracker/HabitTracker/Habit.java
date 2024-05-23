@@ -1,7 +1,7 @@
 package com.HabitTracker.HabitTracker.HabitTracker;
 
 import java.util.Date;
-
+import java.util.Optional;
 
 import com.HabitTracker.HabitTracker.User.User;
 
@@ -40,7 +40,7 @@ public class Habit {
     String level_priority;
     String type;
     Date date;
-    
+   
 
     //Relación entre tabla 'habit' y tabla 'user'
     @ManyToOne
@@ -51,14 +51,5 @@ public class Habit {
    
     private User user;
 
-
-    public void setUserId(Long userId) {
-        throw new UnsupportedOperationException("Unimplemented method 'setUserId'");
-    }
-
-
-    public Object getUserId() {
-        throw new UnsupportedOperationException("Unimplemented method 'getUserId'");
-    }
 
 }

@@ -1,12 +1,13 @@
 package com.HabitTracker.HabitTracker.HabitTracker;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 import lombok.RequiredArgsConstructor;
@@ -18,15 +19,16 @@ public class HabitService {
     @Autowired
     private static final Logger LOGGER = LoggerFactory.getLogger(HabitService.class);
     private final HabitRepository habitRepository;
+   
     
     
-    public List<Habit> getHabitsByUserId(Long userId) {
-        return habitRepository.findUserById(userId);
+    public List<Habit> getHabitsByUserId() {
+        return habitRepository.findAll();
     }
 
    
     public Long saveHabit(Habit habit) {
-        
+
         LOGGER.info("Creando un nuevo hábito: {}", habit);
 
          //Comprobamos que haya rellenado todos los campos obligatorios
@@ -61,9 +63,9 @@ public class HabitService {
         return id;
     }
 
-    public Habit updateHabit(Long id, Habit newHabit, Long userId) {
+    public Habit updateHabit(Long id, Habit newHabit) {
         Habit oldHabit = habitRepository.findById(id).orElseThrow(() -> new RuntimeException("Habit not found"));
-        if (!oldHabit.getUserId().equals(userId)) {
+        if (!oldHabit.getUser().equals(newHabit.getUser())) {
             throw new RuntimeException("Unauthorized");
         }
 
@@ -102,15 +104,15 @@ public class HabitService {
 
     }
 
-    public void deleteHabit(Long id, Long userId) {
-        Habit habit = habitRepository.findById(id).orElseThrow(() -> new RuntimeException("Habit not found"));
-        if (!habit.getUserId().equals(userId)) {
-            throw new RuntimeException("Unauthorized");
-        }
-        habitRepository.deleteById(id);
+    public void deleteHabit(Long habitId) {
+       Optional<Habit> habit = habitRepository.findById(habitId); 
+       
+       if (habit.isEmpty()) {
+        throw new IllegalArgumentException("Habit not found");
+       }
+
+       habitRepository.deleteById(habitId);
+
     }
-
-
-   
     
 }
