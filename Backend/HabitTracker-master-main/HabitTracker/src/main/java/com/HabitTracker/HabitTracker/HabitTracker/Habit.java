@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 import com.HabitTracker.HabitTracker.User.User;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,12 +44,12 @@ public class Habit {
 
     //Relación entre tabla 'habit' y tabla 'user'
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(
             name = "user_id",
             referencedColumnName = "id"
     )
    
     private User user;
-
 
 }

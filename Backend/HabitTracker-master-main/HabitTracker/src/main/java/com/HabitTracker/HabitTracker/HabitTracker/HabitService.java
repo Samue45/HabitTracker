@@ -1,14 +1,17 @@
 package com.HabitTracker.HabitTracker.HabitTracker;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-
+import com.HabitTracker.HabitTracker.User.User;
+import com.HabitTracker.HabitTracker.User.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,15 +22,31 @@ public class HabitService {
     @Autowired
     private static final Logger LOGGER = LoggerFactory.getLogger(HabitService.class);
     private final HabitRepository habitRepository;
+    private final UserRepository userRepository;
    
     
     
     public List<Habit> getHabitsByUserId() {
-        return habitRepository.findAll();
+
+        // Obtenemos el ID del usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+
+        return habitRepository.findHabitByUserId(userId);
     }
 
    
     public Long saveHabit(Habit habit) {
+        
+        // Verificamos la identidad del usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+
+
+        // Buscar el usuario en la base de datos
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
         LOGGER.info("Creando un nuevo hábito: {}", habit);
 
@@ -57,19 +76,29 @@ public class HabitService {
                 .type(habit.getType())
                 .date(habit.getDate())
                 .build();
+        
+        //Establecemos el id que relaciona al Usuario con su hábito
+        newHabit.setUser(user);
 
         Long id = habitRepository.save(newHabit).getId();
         LOGGER.info("El hábito ha sido creado exitosamente");
         return id;
     }
 
-    public Habit updateHabit(Long id, Habit newHabit) {
-        Habit oldHabit = habitRepository.findById(id).orElseThrow(() -> new RuntimeException("Habit not found"));
-        if (!oldHabit.getUser().equals(newHabit.getUser())) {
-            throw new RuntimeException("Unauthorized");
-        }
+    public Habit updateHabit(Long habitId, Habit newHabit) {
+        
+        // Verificamos la identidad del usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+        
+        // Buscar el usuario en la base de datos
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
-        LOGGER.info("Encontrado hábito: {}", oldHabit);
+        // Buscar el hábito en la base de datos
+        Habit oldHabit = habitRepository.findById(habitId).orElseThrow(() -> new RuntimeException("Habit not found"));
+
+        LOGGER.info("Found habit and user: {}", oldHabit , user);
 
         //Comprobamos que haya rellenado todos los campos obligatorios
         if (newHabit.getName() == null) {
@@ -84,7 +113,6 @@ public class HabitService {
             LOGGER.warn("Debe ingresar el tipo de hábito");
             throw new IllegalArgumentException("El hábito necesita un tipo");
         }
-
         if (newHabit.getDate() == null) {
             LOGGER.warn("Debe ingresar una fecha para el hábito");
             throw new IllegalArgumentException("El hábito necesita una fecha");
@@ -105,13 +133,20 @@ public class HabitService {
     }
 
     public void deleteHabit(Long habitId) {
-       Optional<Habit> habit = habitRepository.findById(habitId); 
-       
-       if (habit.isEmpty()) {
-        throw new IllegalArgumentException("Habit not found");
-       }
 
-       habitRepository.deleteById(habitId);
+        // Verificamos la identidad del usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+      
+        Habit habit = habitRepository.findByIdAndUserId(habitId, userId);
+        if (habit != null) {
+            habitRepository.delete(habit);
+        } else {
+            throw new RuntimeException("Habit not found or you are not authorized to delete this habit");
+        }
+
+        habitRepository.deleteById(habitId);
 
     }
     

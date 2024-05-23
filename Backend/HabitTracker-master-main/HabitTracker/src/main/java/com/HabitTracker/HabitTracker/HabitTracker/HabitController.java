@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,20 +33,20 @@ public class HabitController {
     @GetMapping("list-habits")
     public List<Habit> getHabitsByUserId() 
     {
-        return habitService.getHabitsByUserId();
+         return habitService.getHabitsByUserId();
     }
 
     @PostMapping("new-habit")
     public ResponseEntity<Long> saveHabit( @RequestBody Habit habit) 
     {
         Long idHabit = habitService.saveHabit(habit);
-        return new ResponseEntity<>(idHabit,HttpStatus.CREATED);
+        return new ResponseEntity<>(idHabit, HttpStatus.CREATED);
     }
 
-    @PutMapping("habit/{id}")
-    public Habit updateHabit(@PathVariable Long id, @RequestBody Habit newHabit) 
+    @PutMapping("habit/{habitId}")
+    public Habit updateHabit(@PathVariable Long habitId, @RequestBody Habit newHabit) 
     {
-        return habitService.updateHabit(id, newHabit);
+        return habitService.updateHabit(habitId,newHabit);
     }
 
     @DeleteMapping("habit/{id}")
