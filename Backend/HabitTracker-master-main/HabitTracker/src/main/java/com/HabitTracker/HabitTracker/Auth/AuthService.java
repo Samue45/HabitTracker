@@ -40,22 +40,21 @@ public class AuthService {
          LOGGER.info("Comprobando si el nivel de seguridad de la password es buena");
          if (!checkValidezPassword(request.getPassword())) {
             LOGGER.warn("La contrseña no es segura");
-             throw new IllegalArgumentException("La contrseña no es segura");
+             throw new IllegalArgumentException("La contraseña no es segura");
          }
 
-       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-       UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
-       String token = jwtService.getToken(user);
+         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+         UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+         String token = jwtService.getToken(user);
 
-       LOGGER.info("Usuario logeado exitosamente");
-       return AuthResponse.builder()
+         LOGGER.info("Usuario logeado exitosamente");
+         return AuthResponse.builder()
             .token(token)
             .build();
     
     }
 
     public AuthResponse register(RegisterRequest request) {
-
 
         //Comprobaciones antes de registrar un nuevo usuario
         LOGGER.info("Comprobando si el formato del username es válido");
@@ -65,7 +64,7 @@ public class AuthService {
 
         LOGGER.info("Comprobando si el nivel de seguridad de la password es buena");
         if (!checkValidezPassword(request.getPassword())) {
-            throw new IllegalArgumentException("La contrseña no es segura");
+            throw new IllegalArgumentException("La contraseña no es segura");
         }
         
         
@@ -86,6 +85,8 @@ public class AuthService {
             
     }
 
+    //MÉTODOS DE COMPROBACIÓN
+
      //Formato del username
     private boolean checkValidezEmail(String email) {
         return Pattern.compile(
@@ -93,8 +94,6 @@ public class AuthService {
                 Pattern.CASE_INSENSITIVE
         ).asPredicate().test(email);
     }
-
-    
 
     //Nivel de seguridad del password
     private static boolean checkValidezPassword(String password) {
@@ -117,5 +116,4 @@ public class AuthService {
 
         return true;
     }
-
 }

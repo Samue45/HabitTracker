@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 import com.HabitTracker.HabitTracker.User.User;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,25 +40,13 @@ public class Habit {
     String level_priority;
     String type;
     Date date;
-    
-
-    //Relación entre tabla 'habit' y tabla 'user'
+   
+    //Relación entre tabla 'habit' y tabla 'user_data'
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(
             name = "user_id",
             referencedColumnName = "id"
     )
-   
     private User user;
-
-
-    public void setUserId(Long userId) {
-        throw new UnsupportedOperationException("Unimplemented method 'setUserId'");
-    }
-
-
-    public Object getUserId() {
-        throw new UnsupportedOperationException("Unimplemented method 'getUserId'");
-    }
-
 }
