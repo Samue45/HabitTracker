@@ -1,0 +1,43 @@
+<div class="container">
+
+<div class="title">
+    <h4>Lista de Habitos</h4>
+    <button type="button" class="btn btn-primary" routerLink="/add">Agregar</button>
+
+</div>
+    
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Importancia</th>
+            <th scope="col">Días x Semana</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr *ngFor=" let habit of listHabits">
+            <td>{{habit.name}}</td>
+            <td>{{habit.description}}</td>
+            <td>{{habit.category}}</td>
+            <td>{{habit.priority}}</td>
+            <td>{{habit.daysPerWeek}}</td>
+            <td>
+                <button type="button" class="btn btn-info btn-sm" routerLink="/edit/{{habit.id}}">Editar</button>
+                <button type="button" class="btn btn-secondary btn-sm ms-2">Eliminar</button>
+            </td>
+
+            
+          </tr>
+
+          
+          
+        </tbody>
+      </table>
+
+
+</div>

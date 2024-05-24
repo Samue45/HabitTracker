@@ -1,0 +1,15 @@
+I have this error. How can I solve it?
+ [ERROR] NG8001: 'app-navbar' is not a known element:
+1. If 'app-navbar' is an Angular component, then verify that it is included in the '@Component.imports' of this component.        
+2. If 'app-navbar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message. [plugin angular-compiler]
+
+    src/app/app.component.html:2:0:
+      2 │ <app-navbar></app-navbar>
+        ╵ ~~~~~~~~~~~~    
+
+  Error occurs in the template of component AppComponent.
+
+    src/app/app.component.ts:9:15:
+      9 │   templateUrl: './app.component.html',    
+        ╵      
+        'app-navbar' is declared here.      
