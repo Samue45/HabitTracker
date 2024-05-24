@@ -50,7 +50,7 @@ public class User implements UserDetails{
     @Enumerated(EnumType.STRING)
     Role role;
 
-    //Relación entre tabla 'user' y tabla 'habit'
+    //Relación entre tabla 'user_data' y tabla 'habit'
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Habit> habits;

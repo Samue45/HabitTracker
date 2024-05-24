@@ -70,7 +70,7 @@ public class HabitService {
                 .date(habit.getDate())
                 .build();
         
-        //Establecemos el id que relaciona al Usuario con su hábito
+        //Establecemos el id que relaciona al usuario con su hábito
         newHabit.setUser(user);
 
         //Finalmente guardamos el hábito en la DB
@@ -131,7 +131,7 @@ public class HabitService {
         //Comprobamos si existe el hábito y si pertenece al usuario
         Habit habit = habitRepository.findByIdAndUserId(habitId, userId);
         if (habit == null) {
-            throw new RuntimeException("Habit not found or you are not authorized to delete this habit");
+            throw new RuntimeException("Hábito no encontrado o no tienes autorización para eliminarlo");
         }
 
         //Finalmente eliminamos el hábito de la DB

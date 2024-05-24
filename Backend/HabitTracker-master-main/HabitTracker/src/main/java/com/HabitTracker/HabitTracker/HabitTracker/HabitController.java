@@ -29,7 +29,6 @@ public class HabitController {
     @Autowired
     private final HabitService habitService;
     
-
     @GetMapping("list-habits")
     public List<Habit> getHabitsByUserId() 
     {
@@ -49,10 +48,10 @@ public class HabitController {
         return habitService.updateHabit(habitId,newHabit);
     }
 
-    @DeleteMapping("habit/{id}")
-    public ResponseEntity<?>  deleteHabit(@PathVariable Long id)
+    @DeleteMapping("habit/{habitId}")
+    public ResponseEntity<?>  deleteHabit(@PathVariable Long habitId)
     {
-        habitService.deleteHabit(id);
+        habitService.deleteHabit(habitId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     

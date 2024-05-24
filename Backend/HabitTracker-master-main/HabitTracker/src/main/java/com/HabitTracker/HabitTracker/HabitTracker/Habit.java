@@ -41,15 +41,12 @@ public class Habit {
     String type;
     Date date;
    
-
-    //Relación entre tabla 'habit' y tabla 'user'
+    //Relación entre tabla 'habit' y tabla 'user_data'
     @ManyToOne
     @JsonIgnore
     @JoinColumn(
             name = "user_id",
             referencedColumnName = "id"
     )
-   
     private User user;
-
 }
