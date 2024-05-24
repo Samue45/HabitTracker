@@ -17,8 +17,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
-
-
 @Service
 public class JwtService {
 
@@ -29,8 +27,6 @@ public class JwtService {
         
     }
 
-    
-    //La desactivación de los formatos de descarga CVE heredados ya está en marcha y finalizará el 30 de junio de 2024.
     private String getToken(Map<String,Object> extraClaims, UserDetails user) {
         return Jwts
             .builder()
@@ -81,10 +77,4 @@ public class JwtService {
     {
         return getExpiration(token).before(new Date());
     }
-
-   
-
-
-   
-
 }
