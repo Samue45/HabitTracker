@@ -4,6 +4,8 @@ export interface habit{
     description: string;
     category: string;
     priority:string;
-    daysPerWeek:number
+    daysPerWeek:number;
+    daysOfWeek: string[];
+    completed: boolean;
 
 }

@@ -7,7 +7,7 @@
         <div class="card-body">
 <form [formGroup]="formNewHabit" (ngSubmit)="addHabit()">
 
-    <input formControlName="name" type="text" class="form-control" placeholder="Ingrese nombre">
+    <input formControlName="name" type="text" class="form-control" placeholder="Ingrese nombre del hábito	">
    
     
     <input formControlName="description" type="text" class="form-control mt-2" placeholder="Ingrese descripción breve">
@@ -26,9 +26,30 @@
         
       </select>
 
-    <input formControlName="daysPerWeek" type="number" class="form-control mt-2" placeholder="días por semana"  min="1" max="7">
+   
+
+    <div class="mt-2">
+        <div class="custom-select-container">
+            <div class="custom-select" tabindex="0">
+                <span class="custom-select-placeholder">Escoge los días de la semana</span>
+                <div class="custom-select-options">
+                    <div *ngFor="let day of daysOfWeek">
+                        <label>
+                            <input type="checkbox" [value]="day" (change)="onDayChange($event)">{{ day }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="formNewHabit.get('daysOfWeek')?.errors?.['required']">Debe seleccionar al menos un día.</div>
+    
+    
         
-    <div *ngIf="formNewHabit.get('daysPerWeek')?.errors?.['min'] || formNewHabit.get('daysPerWeek')?.errors?.['max']">El número de días por semana debe estar entre 1 y 7.</div>
+    
+
+   
 
         <div class="row mt-2 text-center">
 

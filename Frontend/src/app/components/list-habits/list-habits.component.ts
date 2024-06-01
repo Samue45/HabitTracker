@@ -19,7 +19,9 @@ export class ListHabitsComponent implements OnInit{
       description: 'Drink 8 glasses of water a day',
       category: 'Health',
       priority: 'High',
-      daysPerWeek: 7
+      daysPerWeek: 7,
+      daysOfWeek: ['Lunes','Martes'],
+      completed: false
       },
 
       {
@@ -28,7 +30,10 @@ export class ListHabitsComponent implements OnInit{
       description: 'walk 30 minutes a day',
       category: 'Health',
       priority: 'High',
-      daysPerWeek: 7
+      daysPerWeek: 7,
+      daysOfWeek: ['Lunes','Martes'],
+      completed: false
+
       }
 
   ];

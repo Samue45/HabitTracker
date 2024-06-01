@@ -1,0 +1,44 @@
+.custom-select-container {
+    position: relative;
+}
+
+.custom-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.custom-select-placeholder {
+    color: #999;
+}
+
+.custom-select-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    color: #000;  /* Asegura que el texto sea negro */
+}
+
+.custom-select:focus .custom-select-options,
+.custom-select:hover .custom-select-options {
+    display: block;
+}
+
+.custom-select-options label {
+    display: block;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.custom-select-options label:hover {
+    background: #f0f0f0;
+}

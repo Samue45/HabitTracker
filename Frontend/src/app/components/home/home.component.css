@@ -1,0 +1,101 @@
+:root {
+    --primary-color: #6200ea;
+    --secondary-color: #03dac5;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --header-footer-bg: #fff;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+
+
+  .hero {
+    position: relative;
+    text-align: center;
+    color: white;
+    height: 60vh; /* Ajusta esta altura según tus preferencias */
+    overflow: hidden; /* Esto ocultará cualquier parte de la imagen que exceda la altura especificada */
+  }
+  
+ 
+
+  .hero-image {
+    width: auto;
+    height: 90%; /* Ajusta la altura de la imagen para que ocupe toda la altura del contenedor */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .hero h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 2.5rem;
+  }
+  
+  section {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .benefits, .utilities {
+    background-color: var(--header-footer-bg);
+    margin: 1rem 0;
+  }
+  
+  .benefits h2, .utilities h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
+  .benefit-item, .utility-item {
+    background-color: var(--header-footer-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .call-to-action {
+    background-color: var(--primary-color);
+    /* color: white; */
+    padding: 2rem;
+  }
+  
+  .call-to-action button {
+    background-color: var(--secondary-color);
+    /* color: white; */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .footer {
+    background-color: var(--header-footer-bg);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  }
+  

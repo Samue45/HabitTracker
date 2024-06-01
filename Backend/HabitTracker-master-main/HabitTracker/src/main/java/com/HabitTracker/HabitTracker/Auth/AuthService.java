@@ -28,6 +28,13 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthService.class);
 
+    public AuthService(UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
+        this.userRepository = userRepository;
+        this.jwtService = jwtService;
+        this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+    }
+
     public AuthResponse login(LoginRequest request){
 
          //Comprobaciones antes de logear un  usuario

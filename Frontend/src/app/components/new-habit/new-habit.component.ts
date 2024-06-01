@@ -15,36 +15,51 @@ import { CommonModule } from '@angular/common';
 export class NewHabitComponent implements OnInit{
  formNewHabit: FormGroup;
 
- constructor(private formBuilder: FormBuilder) {
-      this.formNewHabit = this.formBuilder.group(
-        {
-          name: ['', Validators.required],
-          description: ['', Validators.required],
-          category: ['', Validators.required],
-          priority: ['', Validators.required],
-          daysPerWeek: [null, [Validators.required, Validators.min(1), Validators.max(7)]]
-        }
-      )
+ daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
+ selectedDays: Set<string> = new Set<string>();
 
 
 
- }
  
+constructor(private formBuilder: FormBuilder) {
+  this.formNewHabit = this.formBuilder.group({
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    category: ['', Validators.required],
+    priority: ['', Validators.required],
+    daysOfWeek: [[], Validators.required]
+  });
+}
+
+
+  
+
+  onDayChange(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.selectedDays.add(checkbox.value);
+    } else {
+      this.selectedDays.delete(checkbox.value);
+    }
+    this.formNewHabit.patchValue({ daysOfWeek: Array.from(this.selectedDays) });
+  }
 
 
 
-  addHabit(){
-    const newHabit : habit = {
-      
+
+  addHabit() {
+    const newHabit: habit = {
       name: this.formNewHabit.value.name,
       description: this.formNewHabit.value.description,
       category: this.formNewHabit.value.category,
       priority: this.formNewHabit.value.priority,
-      daysPerWeek: this.formNewHabit.value.daysPerWeek
-    }
-
-
+      daysPerWeek: this.formNewHabit.value.daysOfWeek.length,
+      daysOfWeek: this.formNewHabit.value.daysOfWeek,
+      completed: false
+    };
     console.log(newHabit);  
+    
 
   }
 
