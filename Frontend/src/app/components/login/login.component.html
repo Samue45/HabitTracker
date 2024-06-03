@@ -1,33 +1,38 @@
 
 
-<div class="d-flex justify-content-center align-items-center" style="height: 20vh;"></div>
-<div class="col-lg-4 offset-lg-4">
+<div class="d-flex justify-content-center align-items-center" style="height: 30vh;"></div>
+<section id="inicio">
 
 
-<div class="card border-primary mb-3 mt-4" style="max-width: 20rem;">
-    <div class="card-header text-center">Iniciar sesión</div>
-    <div class="card-body">
+    <div class="contenedor">
 
-        <div>
-            <form>
-            <input type="text" class="form-control"  placeholder="Ingresa usuario o email">
-           
-            <input type="text" class="form-control mt-2"  placeholder="Ingresa contraseña">
+        <div class="card border-primary mb-3 mt-4" style="max-width: 20rem; margin: 0 auto;">
+            <div class="card-header text-center">Iniciar sesión</div>
+            <div class="card-body">
 
-            <div class="d-grid gap-2">
-                <button type="button" class="btn btn-primary mt-2" routerLink="/">Ingresar</button>                
-              </div>
-              <p class="mt-2">¿No tienes cuenta? <a href="#" routerLink="/register">Registrate</a></p>
-
-
-           </form>
-
-          </div>
-      
+                <div >
+                    <form (ngSubmit)="loginUser()" autocomplete="on">
+                        <div>
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control mt-2" id="username" [(ngModel)]="login.username" name="username" placeholder="Ingresa username"  required>
+                        </div>
+                        <div>
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control mt-2" id="password" [(ngModel)]="login.password" name="password" placeholder="Ingresa contraseña" required>
+                        </div>
+                     <div class="d-grid gap-2">
+                        <button type="submit" value="Submit" class="btn btn-primary mt-2"  >Ingresar</button>                
+                     </div>
+                      <p class="mt-2">¿No tienes cuenta? <a href="#" routerLink="/register" >Registrate</a></p>
+                   </form>
+                   <div *ngIf="errorMessage">{{ errorMessage }}</div>
+        
+                  </div>
+              
+            </div>
+        
+        </div>
     </div>
-
-</div>
-
-</div>
+</section>
 
 

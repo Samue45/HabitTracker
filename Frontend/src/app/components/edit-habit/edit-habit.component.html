@@ -1,0 +1,54 @@
+<div class="col-lg-4 offset-lg-4">
+    <div class="card text-white bg-primary mb-3 mt-2" style="max-width: 25rem; margin: 0 auto;">
+      <div class="card-header text-center">Edit habit</div>
+      <div class="card-body">
+        <form [formGroup]="habitForm" (ngSubmit)="onSaveChanges()">
+          <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input id="name" type="text" class="form-control" formControlName="name" placeholder="Introduce un nombre" required>
+          </div>
+  
+          <div class="form-group mt-2">
+            <label for="description">Descripción:</label>
+            <input id="description" type="text" class="form-control" formControlName="description" placeholder="Introduce una descripción" required>
+          </div>
+  
+          <div class="form-group mt-2">
+            <label for="type">Tipo:</label>
+            <select id="type" class="form-control" formControlName="type" required>
+              <option value="" disabled selected>Elige un tipo</option>
+              <option value="Salud">Salud</option>
+              <option value="Productividad">Productividad</option>
+              <option value="Tareas del hogar">Tareas del hogar</option>
+            </select>
+          </div>
+  
+          <div class="form-group mt-2">
+            <label for="level_priority">Priority:</label>
+            <select id="level_priority" class="form-control" formControlName="level_priority" required>
+              <option value="" disabled selected>Asigna un nivel de prioridad</option>
+              <option value="Alto">Alto</option>
+              <option value="Medio">Medio</option>
+              <option value="Bajo">Bajo</option>
+            </select>
+          </div>
+  
+          <div class="form-group mt-2">
+            <label for="nameDay">Día de la semana:</label>
+            <input id="nameDay" type="text" class="form-control" formControlName="nameDay" placeholder="Ingresa el nombre del día" required>
+          </div>
+  
+          <div class="row mt-3 text-center">
+            <div class="col-lg-6">
+              <button type="submit" class="btn btn-info">Guardar cambios</button>
+            </div>
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-secondary" routerLink="/list-habits">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  

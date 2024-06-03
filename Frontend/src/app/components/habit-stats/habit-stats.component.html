@@ -1,8 +1,8 @@
-<div class="habit-stats-container">
+<!--<div class="habit-stats-container">
   <div class="day-selector">
     <select (change)="onDayChange($event)">
       <option value="" disabled selected>Seleccione un día</option>
-      <!-- Add the import statement -->
+       Add the import statement 
       <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
     </select>
   </div>
@@ -11,7 +11,7 @@
     <h3>Hábitos para {{ selectedDay }}:</h3>
     <ul>
       <li *ngFor="let habit of getHabitsForDay(selectedDay)">
-        <input type="checkbox" [(ngModel)]="habit.completed"> <!-- Checkbox for completion -->
+        <input type="checkbox" [(ngModel)]="habit.completed">  Checkbox for completion 
         <strong>{{ habit.name }}</strong>: {{ habit.description }}
       </li>
     </ul>
@@ -24,7 +24,7 @@
         <h4>{{ day }}</h4>
         <ul>
           <li *ngFor="let habit of getHabitsForDay(day)">
-            <!-- <input type="checkbox" [(ngModel)]="habit.completed">  -->
+             <input type="checkbox" [(ngModel)]="habit.completed">  
             <strong>{{ habit.name }}</strong>
           </li>
         </ul>
@@ -32,3 +32,4 @@
     </div>
   </div>
 </div>
+-->

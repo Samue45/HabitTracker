@@ -1,11 +1,12 @@
-export interface habit{
+export interface Habit{
     id?: number;
     name: string;
     description: string;
-    category: string;
-    priority:string;
-    daysPerWeek:number;
-    daysOfWeek: string[];
-    completed: boolean;
+    type: string;
+    level_priority:string;
+    /*daysPerWeek:number;
+    daysOfWeek: string[];*/
+    state: boolean;
+    nameDay: string;
 
 }

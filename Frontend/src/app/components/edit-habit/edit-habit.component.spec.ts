@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { EditHabitComponent } from './edit-habit.component';
 
-import { SingUpComponent } from './sing-up.component';
-
-describe('SingUpComponent', () => {
-  let component: SingUpComponent;
-  let fixture: ComponentFixture<SingUpComponent>;
+describe('EditHabitComponent', () => {
+  let component: EditHabitComponent;
+  let fixture: ComponentFixture<EditHabitComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SingUpComponent]
+      imports: [EditHabitComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SingUpComponent);
+    fixture = TestBed.createComponent(EditHabitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
