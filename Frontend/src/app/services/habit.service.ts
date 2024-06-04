@@ -13,6 +13,7 @@ export class HabitService {
   private readonly BASE_URL = 'http://localhost:8080/api/v1';
   private readonly HABITS_URL_GET = `${this.BASE_URL}/list-habits`;
   private readonly HABITS_URL_GET_ID = `${this.BASE_URL}/habit`;
+  private readonly HABITS_URL_GET_NAME_DAY = `${this.BASE_URL}/habit/day`;
   private readonly HABITS_URL_POST = `${this.BASE_URL}/new-habit`;
   private readonly HABITS_URL_DELETE = `${this.BASE_URL}/habit`;
   private readonly HABITS_URL_UPDATE = `${this.BASE_URL}/habit`;
@@ -36,6 +37,22 @@ export class HabitService {
   getHabits(): Observable<Habit[]> {
     const headers = this.getHeaders();
     return this.http.get<Habit[]>(this.HABITS_URL_GET, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getHabitsByNameDay(nameDay: string): Observable<Habit[]> {
+    const headers = this.getHeaders();
+    return this.http.get<Habit[]>(`${this.HABITS_URL_GET_NAME_DAY}/${nameDay}`, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getHabitById(habitId: number): Observable<Habit> {
+    const headers = this.getHeaders();
+    return this.http.get<Habit>(`${this.HABITS_URL_GET_ID}/${habitId}`, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -65,12 +82,6 @@ export class HabitService {
       );
     }
   
-  getHabitById(habitId: number): Observable<Habit> {
-    const headers = this.getHeaders();
-    return this.http.get<Habit>(`${this.HABITS_URL_GET_ID}/${habitId}`, { headers })
-      .pipe(
-        catchError(this.handleError)
-      );
-  }  
+    
 
 }

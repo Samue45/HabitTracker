@@ -1,11 +1,8 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';  // Añade OnInit aquí
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { Habit } from '../../interfaces/habit';
-
-
-
-
+import { HabitService } from '../../services/habit.service';
 
 @Component({
   selector: 'app-habit-stats',
@@ -14,53 +11,45 @@ import { Habit } from '../../interfaces/habit';
   templateUrl: './habit-stats.component.html',
   styleUrls: ['./habit-stats.component.css']
 })
-export class HabitStatsComponent  {
-  listHabits: Habit[] = [
-    // Datos de ejemplo
-    {
-      name: 'Correr',
-      description: 'Salir a correr por la mañana',
-      type: 'Salud',
-      level_priority: 'Alta',
-      state: false,
-      nameDay:""
-    },
-    {
-      name: 'Leer',
-      description: 'Leer un libro por 30 minutos',
-      type: 'Bienestar',
-      level_priority: 'Media',
-      state: false,
-      nameDay:""
-    },
-
-    {
-      name: 'Caminar',
-      description: '10.000 pasos al día',
-      type: 'Salud',
-      level_priority: 'Media',
-      state: false,
-      nameDay:""
-    }
-  ];
-/*
+export class HabitStatsComponent implements OnInit {  // Implementa OnInit aquí
+  listHabits: Habit[] = [];
+  errorMessage: string = '';
   selectedDay: string | null = null;
-  daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];*/
+  daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
-  constructor() { }
+  constructor(private habitService: HabitService) { }
 
-  ngOnInit(): void { }
-/*
+  ngOnInit(): void {
+    // Cargar todos los hábitos inicialmente
+    this.loadHabits();
+  }
+
+  loadHabits(nameDay?: string): void {  // nameDay es opcional aquí
+    this.habitService.getHabitsByNameDay(nameDay || '').subscribe(
+      (data: Habit[]) => {
+        this.listHabits = nameDay ? data.filter(habit => habit.nameDay === nameDay) : data;
+      },
+      (error) => {
+        this.errorMessage = error.message || 'An error occurred while fetching habits';
+      }
+    );
+  }
+
+  getFilteredHabits(): Habit[] {
+    return this.selectedDay ? this.listHabits.filter(habit => habit.nameDay === this.selectedDay) : [];
+  }
+
   getHabitsForDay(day: string): Habit[] {
-    return this.listHabits.filter(habit => habit.daysOfWeek.includes(day));
+    return this.listHabits.filter(habit => habit.nameDay.includes(day));
   }
 
   hasHabits(day: string): boolean {
-    return this.listHabits.some(habit => habit.daysOfWeek.includes(day));
+    return this.listHabits.some(habit => habit.nameDay.includes(day));
   }
 
   onDayChange(event: Event): void {
     this.selectedDay = (event.target as HTMLSelectElement).value;
+    this.loadHabits(this.selectedDay);  // Cargar los hábitos para el día seleccionado
   }
-  */
 }
+
