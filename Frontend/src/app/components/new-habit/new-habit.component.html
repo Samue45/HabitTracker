@@ -1,83 +1,57 @@
-
-<div class="col-lg-4 offset-lg-4">
-
-
-    <div class="card text-white bg-primary mb-3 mt-2" style="max-width: 25rem;">
+<div ass="col-lg-4 offset-lg-4">
+    <div class="card text-white bg-primary mb-3 mt-2" style="max-width: 25rem;margin: 0 auto;">
         <div class="card-header text-center">Ingrese nuevo hábito</div>
         <div class="card-body">
-<form [formGroup]="formNewHabit" (ngSubmit)="addHabit()">
+            <form (ngSubmit)="addHabit()" [formGroup]="habitForm">
+                <div class="form-group">
+                    <label for="name">Nombre:</label>
+                    <input id="name" type="text" class="form-control" formControlName="name" placeholder="Introduce un nombre" required>
+                </div>
 
-    <input formControlName="name" type="text" class="form-control" placeholder="Ingrese nombre del hábito	">
-   
-    
-    <input formControlName="description" type="text" class="form-control mt-2" placeholder="Ingrese descripción breve">
-    <select formControlName="category" type="text" class="form-control mt-2" >
-        <option value="" disabled selected>Seleccione una categoría</option>
-        <option value="Salud">Salud</option>
-        <option value="Productividad">Productividad</option>
-        <option value="Bienestar">Bienestar</option>
-        
-      </select>
-    <select formControlName="priority" type="text" class="form-control mt-2" >
-        <option value="" disabled selected>Asigne una prioridad</option>
-        <option value="Alta">Alta</option>
-        <option value="Media">Media</option>
-        <option value="Baja">Baja</option>
-        
-      </select>
+                <div class="form-group mt-2">
+                    <label for="description">Descripción:</label>
+                    <input id="description" type="text" class="form-control" formControlName="description" placeholder="Introduce una descripción" required>
+                </div>
 
-   
+                <div class="form-group mt-2">
+                    <label for="type">Tipo:</label>
+                    <select id="type" class="form-control" formControlName="type" required>
+                        <option value="" disabled selected>Elige un tipo</option>
+                        <option value="Salud">Salud</option>
+                        <option value="Productividad">Productividad</option>
+                        <option value="Tareas del hogar">Tareas del hogar</option>
+                    </select>
+                </div>
 
-    <div class="mt-2">
-        <div class="custom-select-container">
-            <div class="custom-select" tabindex="0">
-                <span class="custom-select-placeholder">Escoge los días de la semana</span>
-                <div class="custom-select-options">
-                    <div *ngFor="let day of daysOfWeek">
-                        <label>
-                            <input type="checkbox" [value]="day" (change)="onDayChange($event)">{{ day }}
-                        </label>
+                <div class="form-group mt-2">
+                    <label for="level_priority">Priority:</label>
+                    <select id="level_priority" class="form-control" formControlName="level_priority" required>
+                        <option value="" disabled selected>Asigna un nivel de prioridad</option>
+                        <option value="Alto">Alto</option>
+                        <option value="Medio">Medio</option>
+                        <option value="Bajo">Bajo</option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="nameDay">Día de la semana:</label>
+                    <input id="nameDay" type="text" class="form-control" formControlName="nameDay" placeholder="Name's day" required>
+                </div>
+
+                <div class="row mt-3 text-center">
+                    <div class="col-lg-6">
+                        <button type="submit" class="btn btn-info" [disabled]="habitForm.invalid">Guardar</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <button type="button" class="btn btn-secondary" routerLink="/list-habits">Cancelar</button>
                     </div>
                 </div>
-            </div>
+            </form>
+
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
         </div>
     </div>
-
-    <div *ngIf="formNewHabit.get('daysOfWeek')?.errors?.['required']">Debe seleccionar al menos un día.</div>
-    
-    
-        
-    
-
-   
-
-        <div class="row mt-2 text-center">
-
-
-            <div class="col-lg-6">
-                <button [disabled]="formNewHabit.invalid" type="submit" class="btn btn-info">Guardar</button>
-            </div>
-
-            <div class="col-lg-6">
-                <button  type="button" class="btn btn-secondary" routerLink="/" >Cancelar</button>
-
-            </div>
-
-        </div>
-
-
-    
-
-</form>
-
-
-        
-        </div>
-      </div>
-
-
 </div>
-
 
 
 

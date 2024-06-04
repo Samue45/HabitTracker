@@ -17,27 +17,32 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authProvider;
 
+    /**
+     * Configura la cadena de filtros de seguridad.
+     *
+     * @param http Configuración de seguridad HTTP.
+     * @return SecurityFilterChain La cadena de filtros de seguridad.
+     * @throws Exception Si ocurre un error en la configuración.
+     */
     @Bean
-    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-            .csrf(csrf -> 
-                csrf
-                .disable())
-            .authorizeHttpRequests(authRequest -> 
+            .csrf(csrf -> csrf.disable()) // Deshabilita la protección CSRF
+            .authorizeHttpRequests(authRequest ->
                 authRequest
-                    .requestMatchers("/auth/**").permitAll()
-                    .anyRequest().authenticated()
-                    )
+                    .requestMatchers("/auth/**").permitAll() // Permite el acceso sin autenticación a las rutas /auth/**
+                    .anyRequest().authenticated() // Requiere autenticación para cualquier otra ruta
+            )
             .sessionManagement(sessionManager ->
                 sessionManager
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authProvider)
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .build();    
-
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Configura la política de sesión como STATELESS
+            )
+            .authenticationProvider(authProvider) // Configura el proveedor de autenticación
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Añade el filtro de autenticación JWT antes del filtro de autenticación por usuario y contraseña
+            .build();
     }
 }

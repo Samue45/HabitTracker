@@ -1,43 +1,36 @@
 <div class="container">
-
-<div class="title">
-    <h4>Lista de Habitos</h4>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Lista de Hábitos</h4>
     <button type="button" class="btn btn-primary" routerLink="/add">Agregar</button>
-
-</div>
-    
-
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Importancia</th>
-            <th scope="col">Días x Semana</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-        
-          <tr *ngFor=" let habit of listHabits">
-            <td>{{habit.name}}</td>
-            <td>{{habit.description}}</td>
-            <td>{{habit.category}}</td>
-            <td>{{habit.priority}}</td>
-            <td>{{habit.daysPerWeek}}</td>
-            <td>
-                <button type="button" class="btn btn-info btn-sm" routerLink="/edit/{{habit.id}}">Editar</button>
-                <button type="button" class="btn btn-secondary btn-sm ms-2">Eliminar</button>
-            </td>
-
-            
-          </tr>
-
-          
-          
-        </tbody>
-      </table>
-
-
+    <button type="button" class="btn btn-primary" routerLink="/stats">DashBoard de Hábitos</button>
+  </div>
+  
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Importancia</th>
+        <th scope="col">Días x Semana</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let habit of habits" >
+        <td>{{ habit.name}}</td>
+        <td>{{ habit.description}}</td>
+        <td>{{ habit.type}}</td>
+        <td>{{ habit.level_priority}}</td>
+        <td>{{ habit.nameDay}}</td>
+        <td>
+          <button type="button" class="btn btn-info btn-sm" [routerLink]="['/edit', habit.id]" >Editar</button>
+          <button type="button" class="btn btn-danger btn-sm ms-2" (click)="deleteHabit(habit.id)">Eliminar</button>
+        </td>
+      </tr>
+      <div *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </tbody>
+  </table>
 </div>

@@ -1,7 +1,7 @@
 package com.HabitTracker.HabitTracker.Auth;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,58 +28,61 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthService.class);
 
-    public AuthService(UserRepository userRepository, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
-        this.userRepository = userRepository;
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
-    }
-
-    public AuthResponse login(LoginRequest request){
-
-         //Comprobaciones antes de logear un  usuario
-         LOGGER.info("Comprobando si el formato del username es válido");
-         if (!checkValidezEmail(request.getUsername())) {
-            LOGGER.warn("El formato del usuario no es válido");
-             throw new IllegalArgumentException("El formato del usuario no es válido");
-         }
- 
-         LOGGER.info("Comprobando si el nivel de seguridad de la password es buena");
-         if (!checkValidezPassword(request.getPassword())) {
-            LOGGER.warn("La contrseña no es segura");
-             throw new IllegalArgumentException("La contraseña no es segura");
-         }
-
-         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-         UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
-         String token = jwtService.getToken(user);
-
-         LOGGER.info("Usuario logeado exitosamente");
-         return AuthResponse.builder()
-            .token(token)
-            .build();
-    
-    }
-
-    public AuthResponse register(RegisterRequest request) {
-
-        //Comprobaciones antes de registrar un nuevo usuario
-        LOGGER.info("Comprobando si el formato del username es válido");
-        if (!checkValidezEmail(request.getUsername())) {
-            throw new IllegalArgumentException("El formato del usuario no es válido");
+    /**
+     * Inicia sesión un usuario con las credenciales proporcionadas.
+     * @param request La solicitud de inicio de sesión.
+     * @return AuthResponse La respuesta de autenticación con el token JWT.
+     */
+    public AuthResponse login(LoginRequest request) {
+        // Validar formato del username
+        LOGGER.info("Validando el formato del username");
+        if (!isValidEmail(request.getUsername())) {
+            LOGGER.warn("Formato de username inválido");
+            throw new IllegalArgumentException("El formato del username no es válido");
         }
 
-        LOGGER.info("Comprobando si el nivel de seguridad de la password es buena");
-        if (!checkValidezPassword(request.getPassword())) {
+        // Validar nivel de seguridad de la contraseña
+        LOGGER.info("Validando nivel de seguridad de la contraseña");
+        if (!isValidPassword(request.getPassword())) {
+            LOGGER.warn("Contraseña insegura");
             throw new IllegalArgumentException("La contraseña no es segura");
         }
-        
-        
+
+        // Autenticar usuario
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        String token = jwtService.generateToken(user);
+
+        LOGGER.info("Usuario autenticado exitosamente");
+        return AuthResponse.builder()
+            .token(token)
+            .build();
+    }
+
+    /**
+     * Registra un nuevo usuario con la información proporcionada.
+     * @param request La solicitud de registro.
+     * @return AuthResponse La respuesta de autenticación con el token JWT.
+     */
+    public AuthResponse register(RegisterRequest request) {
+        // Validar formato del username
+        LOGGER.info("Validando el formato del username");
+        if (!isValidEmail(request.getUsername())) {
+            throw new IllegalArgumentException("El formato del username no es válido");
+        }
+
+        // Validar nivel de seguridad de la contraseña
+        LOGGER.info("Validando nivel de seguridad de la contraseña");
+        if (!isValidPassword(request.getPassword())) {
+            throw new IllegalArgumentException("La contraseña no es segura");
+        }
+
+        // Crear y guardar nuevo usuario
         User user = User.builder()
             .username(request.getUsername())
             .password(passwordEncoder.encode(request.getPassword()))
-            .firstName(request.getFirstName())
-            .lastName(request.getLastName())
+            .firstname(request.getFirstname())
+            .lastname(request.getLastname())
             .role(Role.USER)
             .build();
 
@@ -87,23 +90,30 @@ public class AuthService {
         LOGGER.info("Usuario registrado exitosamente");
 
         return AuthResponse.builder()
-            .token(jwtService.getToken(user))
+            .token(jwtService.generateToken(user))
             .build();
-            
     }
 
-    //MÉTODOS DE COMPROBACIÓN
+    // MÉTODOS DE VALIDACIÓN
 
-     //Formato del username
-    private boolean checkValidezEmail(String email) {
+    /**
+     * Valida el formato del email.
+     * @param email El email a validar.
+     * @return true si el email es válido, false en caso contrario.
+     */
+    private boolean isValidEmail(String email) {
         return Pattern.compile(
                 "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
                 Pattern.CASE_INSENSITIVE
         ).asPredicate().test(email);
     }
 
-    //Nivel de seguridad del password
-    private static boolean checkValidezPassword(String password) {
+    /**
+     * Valida el nivel de seguridad de la contraseña.
+     * @param password La contraseña a validar.
+     * @return true si la contraseña es segura, false en caso contrario.
+     */
+    private static boolean isValidPassword(String password) {
         // Verificar la longitud de la contraseña
         if (password.length() < 8) {
             return false;
@@ -117,10 +127,7 @@ public class AuthService {
         // Verificar si la contraseña contiene al menos un carácter especial
         Pattern pattern = Pattern.compile("[!@#$%^&*()-_+=]");
         Matcher matcher = pattern.matcher(password);
-        if (!matcher.find()) {
-            return false;
-        }
-
-        return true;
+        return matcher.find();
     }
 }
+

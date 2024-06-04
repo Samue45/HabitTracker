@@ -1,70 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { habit } from '../../interfaces/habit';
+import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HabitService } from '../../services/habit.service';
+import { Habit } from '../../interfaces/habit';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-habit',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule,CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './new-habit.component.html',
-  styleUrl: './new-habit.component.css'
+  styleUrls: ['./new-habit.component.css']
 })
-export class NewHabitComponent implements OnInit{
- formNewHabit: FormGroup;
+export class NewHabitComponent implements OnInit {
+  habits: Habit[] = [];
+  habitForm: FormGroup;
+  errorMessage: string = '';
 
- daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  constructor(private fb: FormBuilder, private habitService: HabitService) {
+    this.habitForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      type: ['', Validators.required],
+      level_priority: ['', Validators.required],
+      nameDay: ['', Validators.required]
+    });
+  }
 
- selectedDays: Set<string> = new Set<string>();
+  ngOnInit(): void {}
 
-
-
- 
-constructor(private formBuilder: FormBuilder) {
-  this.formNewHabit = this.formBuilder.group({
-    name: ['', Validators.required],
-    description: ['', Validators.required],
-    category: ['', Validators.required],
-    priority: ['', Validators.required],
-    daysOfWeek: [[], Validators.required]
-  });
-}
-
-
-  
-
-  onDayChange(event: Event) {
-    const checkbox = event.target as HTMLInputElement;
-    if (checkbox.checked) {
-      this.selectedDays.add(checkbox.value);
+  addHabit(): void {
+    if (this.habitForm.valid) {
+      const newHabit: Habit = this.habitForm.value;
+      this.habitService.postHabits(newHabit).subscribe(
+        (habit: Habit) => {
+          this.habits.push(habit);
+          this.habitForm.reset(); // Resetea el formulario
+        },
+        (error) => {
+          this.errorMessage = error.message || 'An error occurred while adding a new habit';
+        }
+      );
     } else {
-      this.selectedDays.delete(checkbox.value);
+      this.errorMessage = 'Please fill in all required fields';
     }
-    this.formNewHabit.patchValue({ daysOfWeek: Array.from(this.selectedDays) });
-  }
-
-
-
-
-  addHabit() {
-    const newHabit: habit = {
-      name: this.formNewHabit.value.name,
-      description: this.formNewHabit.value.description,
-      category: this.formNewHabit.value.category,
-      priority: this.formNewHabit.value.priority,
-      daysPerWeek: this.formNewHabit.value.daysOfWeek.length,
-      daysOfWeek: this.formNewHabit.value.daysOfWeek,
-      completed: false
-    };
-    console.log(newHabit);  
-    
-
-  }
-
-
-  ngOnInit(): void {
-   
   }
 }
