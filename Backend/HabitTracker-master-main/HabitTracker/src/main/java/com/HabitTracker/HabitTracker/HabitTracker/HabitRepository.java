@@ -16,15 +16,6 @@ public interface HabitRepository extends JpaRepository<Habit, Long> {
     List<Habit> findHabitByUserId(Long userId);
 
     /**
-     * Encuentra hábitos por el ID del usuario y el nombre del día.
-     *
-     * @param userId El ID del usuario.
-     * @param nameDay El nombre del día.
-     * @return Lista de hábitos del usuario para el día especificado.
-     */
-    List<Habit> findHabitByUserIdAndNameDay(Long userId, String nameDay);
-
-    /**
      * Encuentra un hábito por su ID y el ID del usuario.
      *
      * @param habitId El ID del hábito.

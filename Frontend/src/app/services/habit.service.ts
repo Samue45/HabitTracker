@@ -42,14 +42,6 @@ export class HabitService {
       );
   }
 
-  getHabitsByNameDay(nameDay: string): Observable<Habit[]> {
-    const headers = this.getHeaders();
-    return this.http.get<Habit[]>(`${this.HABITS_URL_GET_NAME_DAY}/${nameDay}`, { headers })
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
   getHabitById(habitId: number): Observable<Habit> {
     const headers = this.getHeaders();
     return this.http.get<Habit>(`${this.HABITS_URL_GET_ID}/${habitId}`, { headers })
