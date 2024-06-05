@@ -8,45 +8,60 @@
   
   body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
   }
   
-  .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+ 
   
 
 
   .hero {
+    max-width: 100%;
+    padding-top: 80px;
     position: relative;
     text-align: center;
     color: white;
-    height: 60vh; /* Ajusta esta altura según tus preferencias */
-    overflow: hidden; /* Esto ocultará cualquier parte de la imagen que exceda la altura especificada */
+    height: 120vh; 
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+
+   
   }
+
   
- 
 
   .hero-image {
-    width: auto;
-    height: 90%; /* Ajusta la altura de la imagen para que ocupe toda la altura del contenedor */
+    
+    flex: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+    
+  }
+
+  
+  
+  .hero h2 {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 2.5rem;
   }
-  
-  .hero h1 {
+
+  .hero button{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
+
   }
   
   section {
@@ -56,7 +71,10 @@
   
   .benefits, .utilities {
     background-color: var(--header-footer-bg);
-    margin: 1rem 0;
+    margin: 1rem 0; 
+   
+
+    
   }
   
   .benefits h2, .utilities h2 {
@@ -77,20 +95,11 @@
   }
   
   .call-to-action {
-    background-color: var(--primary-color);
-    /* color: white; */
+   
     padding: 2rem;
   }
   
-  .call-to-action button {
-    background-color: var(--secondary-color);
-    /* color: white; */
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+  
   
   .footer {
     background-color: var(--header-footer-bg);

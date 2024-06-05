@@ -1,56 +1,133 @@
+<!-- Navbar section -->
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Habit Tracker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+     
+      <form class="d-flex ms-auto">
+        <button lass="btn btn-secondary my-2 my-sm-0" routerLink="/register" type="button">Registrarse</button>
+       
+       
+        
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
 <div class="container">
-  <!-- Sección del Héroe -->
+  <!-- Main section -->
   <section class="hero">
-    <img src="assets/images/img_hero1.jpg" alt="Imagen del Héroe" class="hero-image">
-    <h1>Controla tus hábitos para una vida mejor</h1>
+    
+    <div class="hero-image">
+      <img src="assets/images/img_hero1.jpg" alt="Imagen del Héroe" class="hero-image">
+      <h2><figure class="text-center">
+        <blockquote class="blockquote">
+          <p class="mb-0">"Somos lo que hacemos repetidamente. La excelencia, entonces, no es un acto; es un hábito"</p>
+        
+        </blockquote>
+        <figcaption class="blockquote-footer">
+          Aristoteles <cite title="Source Title"></cite>
+        </figcaption>
+      </figure></h2>
+      
+      <button type="button" routerLink="/register" class="btn btn-primary">Crear cuenta</button>
+    </div>
+      
+  
   </section>
 
-  <!-- Sección de Beneficios -->
+  <!-- habit Benefits-->
   <section class="benefits">
     <h2>Beneficios de Seguir Hábitos</h2>
-    <div class="grid">
-      <div class="benefit-item">
-        <h3>Mantente Organizado</h3>
-        <p>Lleva un registro de tus hábitos diarios para mantenerte organizado y alcanzar tus metas.</p>
-      </div>
-      <div class="benefit-item">
-        <h3>Desarrolla Buenos Hábitos</h3>
-        <p>Establece y mantiene buenos hábitos para una vida más saludable y productiva.</p>
-      </div>
-      <div class="benefit-item">
-        <h3>Alcanza tus Metas</h3>
-        <p>Seguir un seguimiento regular te ayuda a mantenerte enfocado y alcanzar tus metas a largo plazo.</p>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Sigue tu proceso</div>
+            <div class="card-body">
+              <p class="card-text">Controlar tu progreso y observa cómo tus esfuerzos se traducen en resultados</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Mantente Motivado</div>
+            <div class="card-body">
+              <p class="card-text">Te da claridad para saber qué acciones puedes tomar para mejorar y te ayuda a mantener la motivación.</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Alcanza tus Metas</div>
+            <div class="card-body">
+              <p class="card-text">El seguimiento de tus hábitos a través del app te puede ayudar a fijar y alcanzar objetivos </p>
+
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    
   </section>
 
-  <!-- Sección de Utilidades -->
+  <!-- App Benefits -->
   <section class="utilities">
     <h2>Características de Nuestra Aplicación</h2>
-    <div class="grid">
-      <div class="utility-item">
-        <h3>Fácil de Usar</h3>
-        <p>Nuestra aplicación es fácil de usar y navegar, lo que facilita el seguimiento de hábitos.</p>
-      </div>
-      <div class="utility-item">
-        <h3>Personalizable</h3>
-        <p>Personaliza tu seguimiento de hábitos para adaptarlo a tus necesidades y preferencias personales.</p>
-      </div>
-      <div class="utility-item">
-        <h3>Informes de Progreso</h3>
-        <p>Genera informes para ver tu progreso y mantenerte motivado.</p>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card border-light mb-3" style="max-width: 20rem;">
+            <div class="card-header">Fácil de Usar</div>
+            <div class="card-body">
+              <p class="card-text">Nuestra aplicación es fácil de usar y navegar, lo que facilita el seguimiento de hábitos</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-light mb-3" style="max-width: 20rem;">
+            <div class="card-header">Personalizable</div>
+            <div class="card-body">
+              <p class="card-text">Personaliza tu seguimiento de hábitos para adaptarlo a tus necesidades y preferencias personales</p>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-light mb-3" style="max-width: 20rem;">
+            <div class="card-header">Informes de Progreso</div>
+            <div class="card-body">
+              <p class="card-text">Genera informes para ver tu progreso y mantenerte motivado día a día y semana a semana</p>
+
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Sección de Llamada a la Acción -->
+  <!-- CTA -->
   <section class="call-to-action">
     <h2>¡Comienza a Controlar tus Hábitos Hoy!</h2>
-    <button type="button"  routerLink="/login">Prueba la Aplicación</button>
+    <p class="text-primary">Crea una cuenta gratis</p>
+    
+    <button type="button" routerLink="/register" class="btn btn-primary">Crear cuenta</button>
+
   </section>
 
-  <!-- Pie de Página -->
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2024 Controla Tus Hábitos. Todos los derechos reservados.</p>
+    <p>&copy; 2024 Creado por CodeDreamers. Todos los derechos reservados.</p>
+  
+    
   </footer>
 </div>

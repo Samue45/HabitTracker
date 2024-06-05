@@ -3,6 +3,17 @@
     margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
 
+}
+
+.title-buttons{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: right;
+}
+
+button{
+    margin-left: 10px;
 }
