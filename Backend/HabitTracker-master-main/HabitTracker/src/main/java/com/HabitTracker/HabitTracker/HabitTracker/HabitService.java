@@ -46,18 +46,6 @@ public class HabitService {
         Long userId = getAuthenticatedUser().getId();
         return habitRepository.findHabitByUserId(userId);
     }
-
-    
-    /**
-     * Obtenemos una lista de todos los hábitos asociados al usuario autenticado en base al día del hábito
-     *
-     * @param nameDay Nombre del día asociado al hábito
-     * @return Lista de hábitos del usuario en base al día de la semana.
-     */
-    public List<Habit> getHabitByNameDay(String nameDay) {
-        Long userId = getAuthenticatedUser().getId();
-        return habitRepository.findHabitByUserIdAndNameDay(userId, nameDay);
-    }
     
     /**
      * Obtenemos uno de los hábitos asociados al usuario autenticado en base al ID del hábito

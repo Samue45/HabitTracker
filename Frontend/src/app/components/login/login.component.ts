@@ -28,7 +28,7 @@ export class LoginComponent {
         // Supongamos que el token está en response.token
         localStorage.setItem('authToken', response.token);
         // Navegar a otra ruta
-        this.router.navigate(['/list-habits']);
+        this.router.navigate(['/stats']);
       },
       error: (error) => {
         // Aquí se maneja un error

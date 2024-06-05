@@ -51,7 +51,7 @@ export class RegisterComponent {
           this.successMessage = 'Registro exitoso';
           this.errorMessage = '';
           form.resetForm();
-          this.router.navigate(['/list-habits']);
+          this.router.navigate(['/login']);
         },
         (error) => {
           this.errorMessage = 'Error en el registro';

@@ -21,6 +21,8 @@
 
 
 <div class="habit-stats-container">
+  <button type="button" class="btn btn-primary" routerLink="/list-habits">Organizar semana</button>
+  <br>
   <div class="day-selector">
     <select (change)="onDayChange($event)">
       <option value="" disabled selected>Seleccione un día</option>
@@ -28,22 +30,24 @@
     </select>
   </div>
 
-  <div class="habits-list" *ngIf="selectedDay">
-    <h3>Hábitos para {{ selectedDay }}:</h3>
-    <ul>
-      <li *ngFor="let habit of getFilteredHabits()">
-        <input type="checkbox" [(ngModel)]="habit.state">
-        <strong>{{ habit.name }}</strong>: {{ habit.description }}
-      </li>
-    </ul>
-  </div>
+  <ng-container *ngIf="selectedDay">
+    <div class="habits-list">
+      <h3>Hábitos para {{ selectedDay }}:</h3>
+      <ul >
+        <li *ngFor="let habit of getFilteredHabits()">
+          <input type="checkbox" [(ngModel)]="habit.state">
+          <strong>{{ habit.name }}</strong>: {{ habit.description }}
+        </li>
+      </ul>
+    </div>
+  </ng-container>
 
   <div class="weekly-calendar">
     <h3>Calendario Semanal:</h3>
     <div class="calendar-grid">
       <div *ngFor="let day of daysOfWeek" class="calendar-day" [class.has-habits]="hasHabits(day)">
         <h4>{{ day }}</h4>
-        <ul>
+        <ul style="list-style: none;">
           <li *ngFor="let habit of getHabitsForDay(day)">
             <input type="checkbox" [(ngModel)]="habit.state">
             <strong>{{ habit.name }}</strong>
@@ -53,3 +57,4 @@
     </div>
   </div>
 </div>
+

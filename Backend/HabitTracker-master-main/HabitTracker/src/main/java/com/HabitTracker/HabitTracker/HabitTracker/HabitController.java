@@ -34,16 +34,6 @@ public class HabitController {
         return habitService.getHabitsByUserId();
     }
 
-    /**
-     * Obtiene una lista de hábitos por el nombre del día.
-     *
-     * @param nameDay Nombre del día.
-     * @return Lista de hábitos.
-     */
-    @GetMapping("habit/day/{nameDay}")
-    public List<Habit> getHabitByNameDay(@PathVariable String nameDay) {
-        return habitService.getHabitByNameDay(nameDay);
-    }
 
     /**
      * Obtiene un hábito por su ID.
