@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group mt-2">
-                    <label for="level_priority">Priority:</label>
+                    <label for="level_priority">Prioridad:</label>
                     <select id="level_priority" class="form-control" formControlName="level_priority" required>
                         <option value="" disabled selected>Asigna un nivel de prioridad</option>
                         <option value="Alto">Alto</option>
@@ -42,8 +42,20 @@
                 </div>
 
                 <div class="form-group mt-2">
+                    
                     <label for="nameDay">Día de la semana:</label>
-                    <input id="nameDay" type="text" class="form-control" formControlName="nameDay" placeholder="Name's day" required>
+                    <select id="nameDay" class="form-control" formControlName="nameDay" required>
+                        <option value="" disabled selected>Escoge un día</option>
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miercoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sabado">Sábado</option>
+                        <option value="Domingo">Domingo</option>
+                    </select>
+
+
                 </div>
 
                 <div class="row mt-3 text-center">
