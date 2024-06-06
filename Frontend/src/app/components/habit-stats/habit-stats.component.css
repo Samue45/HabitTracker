@@ -49,4 +49,15 @@
   .calendar-day.has-habits {
     background-color: #d1ffd6;
   }
+
+  .title-buttons{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: right;
+}
+
+button{
+    margin-left: 10px;
+}
   
