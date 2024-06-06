@@ -1,1 +1,14 @@
 
+.card-header{
+    font-size: 40px;
+    font-family: system-ui;
+}
+
+.title{
+    font-size: 30px;
+    font-family: system-ui;
+}
+
+.contenedor{
+    margin: 0 auto ;
+}

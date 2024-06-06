@@ -1,22 +1,20 @@
-
-
-<div class="d-flex justify-content-center align-items-center" style="height: 30vh;"></div>
+<div class="d-flex justify-content-center align-items-center" style="height: 24vh;"></div>
 <section id="inicio">
 
 
     <div class="contenedor">
 
-        <div class="card border-primary mb-3 mt-4" style="max-width: 20rem; margin: 0 auto;">
+        <div class="card border-primary mb-3 mt-4" style="max-width: 25rem; margin: 0 auto;">
             <div class="card-header text-center">Iniciar sesión</div>
             <div class="card-body">
 
                 <div >
                     <form (ngSubmit)="loginUser()" autocomplete="on">
-                        <div>
+                        <div class="title">
                             <label for="username">Username</label>
                             <input type="text" class="form-control mt-2" id="username" [(ngModel)]="login.username" name="username" placeholder="Ingresa username"  required>
                         </div>
-                        <div>
+                        <div class="title">
                             <label for="password">Password</label>
                             <input type="password" class="form-control mt-2" id="password" [(ngModel)]="login.password" name="password" placeholder="Ingresa contraseña" required>
                         </div>

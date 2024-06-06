@@ -16,6 +16,7 @@ export class NewHabitComponent implements OnInit {
   habits: Habit[] = [];
   habitForm: FormGroup;
   errorMessage: string = '';
+  successMessage: string = ''; 
 
   constructor(private fb: FormBuilder, private habitService: HabitService) {
     this.habitForm = this.fb.group({
@@ -36,13 +37,15 @@ export class NewHabitComponent implements OnInit {
         (habit: Habit) => {
           this.habits.push(habit);
           this.habitForm.reset(); // Resetea el formulario
+          this.successMessage = 'Hábito creado exitosamente!';  // Establece el mensaje de éxito
+          setTimeout(() => this.successMessage = '', 3000);  // Elimina el mensaje después de 3 segundos
         },
         (error) => {
-          this.errorMessage = error.message || 'An error occurred while adding a new habit';
+          this.errorMessage = error.message || 'A ocurrido un error al añadir un nuevo hábito';
         }
       );
     } else {
-      this.errorMessage = 'Please fill in all required fields';
+      this.errorMessage = 'Por favor, rellene todos los apartados';
     }
   }
 }

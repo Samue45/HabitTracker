@@ -19,6 +19,7 @@ export class EditHabitComponent implements OnInit {
   habitForm: FormGroup;
   habitId: number | undefined ;
   errorMessage: string = '';
+  successMessage: string = ''; 
 
   constructor(private fb: FormBuilder, private habitService: HabitService , private router: Router,  private route: ActivatedRoute,) {
     this.habitForm = this.fb.group({
@@ -56,16 +57,21 @@ export class EditHabitComponent implements OnInit {
   onSaveChanges(): void {
     if (this.habitForm.valid) {
       const updatedHabit = { id: this.habitId, ...this.habitForm.value };
-      console.log('Updated Habit:', updatedHabit); // Verificar el contenido de updatedHabit
+      console.log('Updated Habit:', updatedHabit);
       this.habitService.updateHabit(updatedHabit).subscribe(
         response => {
-          console.log('Habit updated:', response);
-          this.router.navigate(['/list-habits']);
+          console.log('Hábito editado:', response);
+          this.successMessage = 'Hábito editado exitosamente!';
+          setTimeout(() => {
+            this.router.navigate(['/list-habits']);
+          }, 2000); // Redirige después de 2 segundos
         },
         error => {
-          console.error('Error updating habit:', error);
+          console.error('Error editando habit:', error);
+          this.errorMessage = 'Fallo al editar el hábito. Por favor, intentelo de nuevo.';
         }
       );
     }
   }
+  
 }
