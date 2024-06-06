@@ -1,3 +1,4 @@
+
 .custom-select-container {
     position: relative;
 }
@@ -41,4 +42,39 @@
 
 .custom-select-options label:hover {
     background: #f0f0f0;
+}
+
+.card {
+    font-family: system-ui;
+    
+}
+.card-body{
+    background-color: rgba(236, 131, 45, 0.795);
+    
+}
+
+.card-header{
+    font-size: 30px;
+}
+
+.form-group{
+    font-size: 20px;
+}
+
+.error-message {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    background-color: rgba(194, 47, 21, 0.795);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+  
+.success-message {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    background-color: rgba(21, 194, 21, 0.795);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
 }

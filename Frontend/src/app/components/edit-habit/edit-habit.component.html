@@ -2,6 +2,14 @@
     <div class="card text-white bg-primary mb-3 mt-2" style="max-width: 25rem; margin: 0 auto;">
       <div class="card-header text-center">Edit habit</div>
       <div class="card-body">
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
+
         <form [formGroup]="habitForm" (ngSubmit)="onSaveChanges()">
           <div class="form-group">
             <label for="name">Nombre:</label>
