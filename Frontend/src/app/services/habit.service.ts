@@ -13,9 +13,9 @@ export class HabitService {
   private readonly BASE_URL = 'http://localhost:8080/api/v1';
   private readonly HABITS_URL_GET = `${this.BASE_URL}/list-habits`;
   private readonly HABITS_URL_GET_ID = `${this.BASE_URL}/habit`;
-  private readonly HABITS_URL_GET_NAME_DAY = `${this.BASE_URL}/habit/day`;
   private readonly HABITS_URL_POST = `${this.BASE_URL}/new-habit`;
   private readonly HABITS_URL_DELETE = `${this.BASE_URL}/habit`;
+  private readonly HABITS_URL_DELETE_ALL = `${this.BASE_URL}/habit/deleteAll`;
   private readonly HABITS_URL_UPDATE = `${this.BASE_URL}/habit`;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -61,6 +61,14 @@ export class HabitService {
   deleteHabit(habitId: number): Observable<Habit> {
     const headers = this.getHeaders();
     return this.http.delete<Habit>(`${this.HABITS_URL_DELETE}/${habitId}`,{ headers })
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteAllHabits(): Observable<Habit> {
+    const headers = this.getHeaders();
+    return this.http.delete<Habit>(this.HABITS_URL_DELETE_ALL ,{ headers })
     .pipe(
       catchError(this.handleError)
     );

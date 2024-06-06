@@ -15,7 +15,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class ListHabitsComponent implements OnInit {
   habits: Habit[] = [];
-  habitToEdit: Habit | null = null;
   errorMessage: string = '';
 
   constructor(private habitService: HabitService) {}
