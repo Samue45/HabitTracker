@@ -82,4 +82,16 @@ public class HabitController {
         habitService.deleteHabit(habitId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+     /**
+     * Elimina un hábito por su ID.
+     *
+     * @param habitId ID del hábito a eliminar.
+     * @return ResponseEntity sin contenido.
+     */
+    @DeleteMapping("habit/deleteAll")
+    public ResponseEntity<Void> deleteAllHabits() {
+        habitService.deleteAllHabits();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
+    }
 }

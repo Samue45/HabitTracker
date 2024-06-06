@@ -22,6 +22,8 @@
 
 <div class="habit-stats-container">
   <button type="button" class="btn btn-primary" routerLink="/list-habits">Organizar semana</button>
+  <button type="button" class="btn btn-primary" (click) = "resetWeek()">Reiniciar semana</button>
+  
   <br>
   <div class="day-selector">
     <select (change)="onDayChange($event)">

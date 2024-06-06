@@ -13,6 +13,7 @@ import com.HabitTracker.HabitTracker.Exceptions.UserNotFoundException;
 import com.HabitTracker.HabitTracker.User.User;
 import com.HabitTracker.HabitTracker.User.UserRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -150,8 +151,9 @@ public class HabitService {
      * Eliminamos un hábito en base a su ID
      *
      * @param habitId El ID del hábito.
-     * @return Eliminamos el hábito de la Base de Datos
+     *  @return ResponseEntity sin contenido.
      */
+    
     public void deleteHabit(Long habitId) {
         Long userId = getAuthenticatedUser().getId();
         Habit habit = habitRepository.findByIdAndUserId(habitId, userId);
@@ -161,6 +163,18 @@ public class HabitService {
 
         habitRepository.delete(habit);
         LOGGER.info("El hábito con id {} ha sido eliminado exitosamente", habitId);
+    }
+
+    /**
+     * Eliminamos todos los hábitos en base al ID del usuario
+     * 
+     * @return ResponseEntity sin contenido.
+     */
+    @Transactional
+    public void deleteAllHabits() {
+        Long userId = getAuthenticatedUser().getId();
+        habitRepository.deleteAllHabitByUserId(userId);
+        LOGGER.info("Se han eliminado todos los hábitos del usuario con id: " + userId);
     }
 }
 

@@ -46,4 +46,16 @@ export class HabitStatsComponent implements OnInit {
   onDayChange(event: Event): void {
     this.selectedDay = (event.target as HTMLSelectElement).value;
   }
+
+  resetWeek(): void {
+    this.habitService.deleteAllHabits().subscribe(
+      () => {
+        this.listHabits = []; // Vacía la lista de hábitos en el componente
+        console.log('Todos los hábitos han sido eliminados');
+      },
+      (error) => {
+        this.errorMessage = error.message || 'An error occurred while deleting the habit';
+      }
+    );
+  }
 }
