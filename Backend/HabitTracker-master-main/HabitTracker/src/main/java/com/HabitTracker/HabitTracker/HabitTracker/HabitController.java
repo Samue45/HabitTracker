@@ -84,7 +84,7 @@ public class HabitController {
     }
 
      /**
-     * Elimina un hábito por su ID.
+     * Elimina todos los hábitos por el ID del usuario.
      *
      * @param habitId ID del hábito a eliminar.
      * @return ResponseEntity sin contenido.
