@@ -6,7 +6,9 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  
   private loginUrl = 'http://localhost:8080/auth/login';
+  private logoutUrl = 'http://localhost:8080/auth/logout';
 
   constructor(private http: HttpClient) { }
 
@@ -20,14 +22,15 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    if (typeof window !== 'undefined' && localStorage.getItem('token')) {
-      return localStorage.getItem('token');
-    } else {
-      return null; // O manejar el caso donde localStorage no está disponible
-    }
+    return localStorage.getItem('authToken');
   }
 
-  logout(): void {
-    localStorage.removeItem('authToken');
+  logout(): Observable<any> {
+    return this.http.post(this.logoutUrl, null);
+  }
+
+  clearToken() {
+    localStorage.removeItem('authToken'); // Limpiar el token de autenticación del almacenamiento local
   }
 }
+
