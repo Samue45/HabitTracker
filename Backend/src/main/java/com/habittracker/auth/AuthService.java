@@ -3,9 +3,10 @@ package com.habittracker.auth;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.Authentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -97,6 +98,7 @@ public class AuthService {
             .build();
     }
 
+    
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
@@ -106,8 +108,15 @@ public class AuthService {
             if (authentication != null) {
                 request.getSession().invalidate();
             }
+    
+            LOGGER.info("Logout exitoso");
+        } else {
+            throw new IllegalArgumentException("Token de autorización no válido");
         }
     }
+    
+    
+
     
     
 
@@ -147,5 +156,6 @@ public class AuthService {
         return matcher.find();
     }
 
+   
 }
 

@@ -13,27 +13,20 @@ export class NavbarComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   logout() {
-    this.authService.logout().subscribe(
-      () => {
-        // Éxito: el logout se ha completado exitosamente
-        console.log('Logout exitoso');
-        // Limpiar el token de autenticación local
-        this.authService.clearToken();
-        // Redirigir al componente de login u otra página
-        this.router.navigate(['/login']);
+    this.authService.logout().subscribe({
+      next: (response) => {
+        console.log('Logout exitoso', response);
+        
       },
-      error => {
-        // Error: no se pudo completar el logout
+      error: (error) => {
         console.error('Error al cerrar sesión:', error);
-        // Aquí puedes mostrar un mensaje de error al usuario si lo deseas
       },
-      () => {
-        // Completado: el logout ha finalizado, puede ser útil para realizar alguna acción adicional si es necesario
+      complete: () => {
         console.log('Logout completado');
       }
-    );
+    });
   }
-  
+
 }
 
 
