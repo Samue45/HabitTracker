@@ -1,7 +1,5 @@
 services:
-  - type: web
-    name: habittracker-backend
-    env: docker
-    dockerfilePath: ./Dockerfile
+  - name: backend
     buildCommand: ./mvnw package
-    startCommand: java -jar target/habittracker.jar
+    startCommand: java -jar target/HabitTracker-0.0.1-SNAPSHOT.jar
+
