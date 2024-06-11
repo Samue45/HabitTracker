@@ -4,17 +4,25 @@
             "type": "java",
             "name": "HabitTrackerApplication",
             "request": "launch",
-            "mainClass": "com.habittracker.HabitTrackerApplication"
+            "mainClass": "com.habittracker.HabitTrackerApplication",
+            "classPaths": [
+                "${workspaceFolder}/Backend/target/classes"
+            ],
+            "modulePaths": []
         },
         {
             "type": "java",
             "name": "Spring Boot-HabitTrackerApplication<HabitTracker>",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/Backend",
             "mainClass": "com.habittracker.HabitTrackerApplication",
             "projectName": "HabitTracker",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "classPaths": [
+                "${workspaceFolder}/Backend/target/classes"
+            ],
+            "modulePaths": []
         }
     ]
 }
