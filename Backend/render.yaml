@@ -1,5 +1,0 @@
-services:
-  - name: backend
-    buildCommand: ./mvnw package
-    startCommand: java -jar target/HabitTracker-0.0.1-SNAPSHOT.jar
-
