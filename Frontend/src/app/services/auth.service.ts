@@ -26,11 +26,20 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(this.logoutUrl, null);
+    return this.http.post(this.logoutUrl, null, {
+      headers: {
+        Authorization: `Bearer ${this.getToken()}`
+      }
+    }).pipe(
+      tap(() => {
+        this.clearToken();
+      })
+    );
   }
 
   clearToken() {
-    localStorage.removeItem('authToken'); // Limpiar el token de autenticación del almacenamiento local
+    localStorage.removeItem('authToken');
   }
 }
+
 
