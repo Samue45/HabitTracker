@@ -1,5 +1,5 @@
-# Usa una imagen de Maven para construir la aplicación
-FROM maven:3.8.4-openjdk-11 AS build
+# Usa una imagen de Maven con OpenJDK 21 para construir la aplicación
+FROM maven:3.8.4-openjdk-21 AS build
 
 # Crea y define el directorio de trabajo
 WORKDIR /app
@@ -12,8 +12,8 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn package -DskipTests
 
-# Usa una imagen de OpenJDK para ejecutar la aplicación
-FROM openjdk:11-jre-slim
+# Usa una imagen de OpenJDK 21 para ejecutar la aplicación
+FROM openjdk:21-jre-slim
 
 # Crea y define el directorio de trabajo
 WORKDIR /app
@@ -26,3 +26,4 @@ EXPOSE 8080
 
 # Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
