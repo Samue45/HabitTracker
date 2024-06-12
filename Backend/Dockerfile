@@ -1,5 +1,9 @@
-# Usa una imagen de Maven con OpenJDK 21 para construir la aplicación
+# Usa una imagen base de OpenJDK 21 para construir la aplicación
 FROM eclipse-temurin:21-jdk AS build
+
+# Instala Maven
+RUN apt-get update && \
+    apt-get install -y maven
 
 # Crea y define el directorio de trabajo
 WORKDIR /app
@@ -26,5 +30,4 @@ EXPOSE 8080
 
 # Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
-
 
