@@ -11,7 +11,7 @@ COPY . .
 RUN npm install
 
 # Construir la aplicación Angular
-RUN npm run build
+RUN npm run build --prod
 
 # Instalar un servidor HTTP para servir la aplicación
 RUN npm install -g http-server
@@ -20,4 +20,4 @@ RUN npm install -g http-server
 EXPOSE 8080
 
 # Comando para ejecutar el servidor HTTP y servir la aplicación Angular
-CMD ["http-server", "dist/tu-app-angular"]
+CMD ["http-server", "dist/codedreamers-app"]
