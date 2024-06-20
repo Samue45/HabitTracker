@@ -1,4 +1,15 @@
+name: codedreamers-backend
+
 services:
-  - name: backend
-    buildCommand: ./mvnw clean package
-    startCommand: java -jar target/HabitTracker-0.0.1-SNAPSHOT.jar
+  - name: spring-service
+    image:
+      name: docker.io/Samue45/HabitTracker-backend
+      source:
+        git:
+          url: https://github.com/Samue45/HabitTracker.git
+          branch: main
+          build_command: docker build -t Samue45/HabitTracker-backend .
+          registry: docker.io
+    ports:
+      - port: 8080
+        protocol: HTTP

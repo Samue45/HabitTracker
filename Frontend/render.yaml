@@ -1,7 +1,15 @@
+name: codedreamers-app
+
 services:
-  - type: web
-    name: habittracker-frontend
-    env: docker
-    dockerfilePath: ./frontend/Dockerfile
-    buildCommand: npm install && npm run build
-    startCommand: http-server dist/tu-app-angular
+  - name: angular-service
+    image:
+      name: docker.io/Samu345/HabitTracker
+      source:
+        git:
+          url: https://github.com/Samue45/HabitTracker.git
+          branch: main
+          build_command: docker build -t Samue45/HabitTracker .
+          registry: docker.io
+    ports:
+      - port: 80
+        protocol: HTTP

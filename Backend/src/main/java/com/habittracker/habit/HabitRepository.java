@@ -19,7 +19,7 @@ public interface HabitRepository extends JpaRepository<Habit, Long> {
     List<Habit> findHabitByUserId(Long userId);
     
     /**
-     * Encuentra hábitos por el ID del usuario.
+     * Elimina todos los  hábitos por el ID del usuario.
      *
      * @param userId El ID del usuario.
      * @return ResponseEntity sin contenido.
